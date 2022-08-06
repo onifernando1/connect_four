@@ -1,3 +1,6 @@
+require 'matrix'
+require 'colorize'
+
 # Pseudocode for connect 4 
 
 # 1. Board - 7x6 - empty circles 
@@ -10,4 +13,28 @@
 
 class Board 
 
+    def make_board
+
+        rows = 6
+        columns = 7
+
+        @board = Array.new(rows) do
+            Array.new(columns) { "a" }
+        end
+    end 
+
+    def show_board
+
+    @temp = @board
+    @board = @board.map {|array| array.join("")}
+    puts @board
+    @board = @temp
+
+
+    end 
+
 end 
+
+board = Board.new()
+board.make_board()
+board.show_board()
