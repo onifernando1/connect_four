@@ -105,14 +105,19 @@ class Game
         @current_player = @p1
         @next_move = false 
         @win = false 
+
     end 
 
     def get_move
         @next_move = false 
-        puts "#{@current_player.name}, select a collumn"
+        puts "#{@current_player.name}, select a collumn between 1 and 7"
         @player_move = gets.chomp
         @player_move = @player_move.to_i
         @player_move -= 1
+        if @player_move < 0 || @player_move >= 7
+            puts "INVALID MOVE!"
+            get_move()
+        end 
         # puts @player_move
     end 
 
