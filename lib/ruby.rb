@@ -34,10 +34,22 @@ class Board attr_accessor :board
 
 end 
 
-class Player
+class Player 
+    attr_accessor :p1_name, :p2_name
     
-    def initialize 
+   
 
+    def get_player_names
+        puts "Enter player one name:"
+        @p1_name = gets.chomp()
+        puts "Enter player one name:"
+        @p2_name = gets.chomp()
+        @p1_name, @p2_name
+    end 
+
+    def create_players 
+        p1 = PlayerOne.new(@p1_name)
+        p2 = PlayerTwo.new(@p2_name)
     end 
 
 
@@ -46,12 +58,23 @@ end
 
 class PlayerOne < Player
 
+    def initialize(p1_name)
+        @p1_name = p1_name
+    end 
+
 end 
 
 class PlayerTwo < Player
+
+    def initalize(p2_name)
+        @p2_name = p2_name
+    end 
+
+end 
 
 board = Board.new()
 board.make_board()
 # board.show_board()
 board.change_board(1,3,"X")
 board.show_board()
+player = Player.new()
