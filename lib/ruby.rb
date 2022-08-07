@@ -13,9 +13,16 @@ require 'colorize'
 class Board 
     attr_accessor :board
 
+    def initialize 
+
+        @circle = " \u2B24".encode("utf-8").white
+
+
+    end 
+
     def make_board
 
-        @board = Array.new(6) {Array.new(7,"a")}
+        @board = Array.new(6) {Array.new(7,@circle)}
     end 
 
     def show_board
@@ -64,6 +71,8 @@ class PlayerOne < Player
 
     def initialize(p1_name)
         @p1_name = p1_name
+        @p1_symbol = "\u2B24".encode("utf-8").red
+
     end 
 
 end 
@@ -82,7 +91,7 @@ end
 board = Board.new()
 board.make_board()
 # board.show_board()
-board.change_board(1,3,"X")
+# board.change_board(1,3,"X")
 board.show_board()
 player = Player.new()
 player.get_p1_name
