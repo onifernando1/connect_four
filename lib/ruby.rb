@@ -89,8 +89,8 @@ class PlayerTwo < Player
 end 
 
 class Game
-    
-    attr_accessor :new_board
+    # remove bottom, playermove board  current player after testing 
+    attr_accessor :new_board, :bottom, :player_move, :board, :current_player
     
     def initialize 
         @new_board = Board.new()
@@ -107,24 +107,23 @@ class Game
 
     def get_move
         puts "#{@current_player.name}, select a collumn"
-        @player_move = gets.chomp.to_i
-        @player_move -=1
-        puts @player_move
+        @player_move = gets.chomp
+        @player_move = @player_move.to_i
+        @player_move -= 1
+        # puts @player_move
     end 
 
     def make_move
        
         @bottom = 5 
 
-        until @board[@player_move][@bottom] === @new_board.circle || @bottom < 0
-            puts "BOTTOM IS #{@bottom}"
+        until @board[@bottom][@player_move] == @new_board.circle || @bottom < 0
             @bottom -= 1 
         end 
         
         if @bottom < 0 
             puts "INVALID"
         else 
-            puts "BOTTOM IS #{@bottom}"
             @board[@bottom][@player_move] = @current_player.symbol
         end 
 
@@ -140,3 +139,6 @@ game.new_board.show_board()
 game.get_move()
 game.make_move()
 game.new_board.show_board()
+
+puts game.board[0][0] ==  game.new_board.circle
+puts game.current_player.symbol == game.new_board.circle
