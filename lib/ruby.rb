@@ -147,17 +147,22 @@ class Game
 
     end 
 
+    def check_win
+
+        
+    end 
+
     def round 
         get_move()
         make_move()
         @new_board.show_board()
+        check_win()
     end 
 
     def play 
 
         until @win == true 
             round()
-
         end 
 
     end 
