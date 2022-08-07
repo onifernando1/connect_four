@@ -153,10 +153,12 @@ class Game
 
     def check_win
 
+
+    #Horizontal wins 
+
         for i in (0..5)
             for a in (0..3)
                 
-                #Horizontal wins #1
                 if @board[i][a] == @p2.symbol && @board[i][a+1] == @p2.symbol && board[i][a+2] == @p2.symbol && board[i][a+3] == @p2.symbol
                     @p2_win = true 
                     puts "#{@p2.name} WINS"
@@ -169,7 +171,52 @@ class Game
             end 
         end 
 
-        for i in ()
+         #Vertical wins 
+
+        for x in (0..2)
+            for y in (0..6)
+
+                if @board[x][y] == @p1.symbol && @board[x+1][y] == @p1.symbol && @board[x+2][y] == @p1.symbol && @board[x+3][y] == @p1.symbol
+                    @p1_win = true 
+                    puts "#{@p1.name} WINS"
+                    @win = true 
+                elsif @board[x][y] == @p2.symbol && @board[x+1][y] == @p2.symbol && @board[x+2][y] == @p2.symbol && @board[x+3][y] == @p2.symbol
+                    @p2_win = true 
+                    puts "#{@p2.name} WINS"
+                    @win = true 
+                end 
+            end 
+        end 
+
+        # Left diagonals 
+        for x in (0..2)
+            for y in (0..3)
+            if @board[x][y] == @p1.symbol && @board[x+1][y+1] == @p1.symbol && @board[x+2][y+2] == @p1.symbol && @board[x+3][y+3] == @p1.symbol
+                @p1_win = true 
+                puts "#{@p1.name} WINS"
+                @win = true 
+            elsif @board[x][y] == @p2.symbol && @board[x+1][y+1] == @p2.symbol && @board[x+2][y+2] == @p2.symbol && @board[x+3][y+3] == @p2.symbol
+                @p2_win = true 
+                puts "#{@p2.name} WINS"
+                @win = true 
+            end 
+        end 
+
+        #right diagonals 
+        for x in (3..5)
+            for y in (3..6)
+                if @board[x][y] == @p1.symbol && @board[x+1][y-1] == @p1.symbol && @board[x+2]y-2] == @p1.symbol && @board[x+3][y-3] == @p1.symbol
+                    @p1_win = true 
+                    puts "#{@p1.name} WINS"
+                    @win = true 
+                elsif @board[x][y] == @p2.symbol && @board[x+1][y-1] == @p2.symbol && @board[x+2]y-2] == @p2.symbol && @board[x+3][y-3] == @p2.symbol
+                    @p2_win = true 
+                    puts "#{@p2.name} WINS"
+                    @win = true 
+                end 
+            end 
+        end 
+            
 
     end 
 
@@ -192,7 +239,7 @@ end
 
 game = Game.new()
 game.play()
-
+# game.check_win()
 
 
 # puts game.board[0][0] ==  game.new_board.circle
