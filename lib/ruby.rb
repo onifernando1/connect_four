@@ -10,7 +10,8 @@ require 'colorize'
 # 6. Check_win? if four in a row vertically/horizontally/diagonally player x wins 
 # 7. End Loop 
 
-class Board attr_accessor :board
+class Board 
+    attr_accessor :board
 
     def make_board
 
@@ -35,21 +36,23 @@ class Board attr_accessor :board
 end 
 
 class Player 
-    attr_accessor :p1_name, :p2_name
+    attr_accessor :p1_name, :p2_name, :p1, :p2
     
    
 
-    def get_player_names
+    def get_p1_name
         puts "Enter player one name:"
         @p1_name = gets.chomp()
-        puts "Enter player one name:"
+    end 
+
+    def get_p2_name 
+        puts "Enter player two name:"
         @p2_name = gets.chomp()
-        @p1_name, @p2_name
     end 
 
     def create_players 
-        p1 = PlayerOne.new(@p1_name)
-        p2 = PlayerTwo.new(@p2_name)
+        @p1 = PlayerOne.new(@p1_name)
+        @p2 = PlayerTwo.new(@p2_name)
     end 
 
 
@@ -57,6 +60,7 @@ class Player
 end 
 
 class PlayerOne < Player
+    attr_reader :p1_name
 
     def initialize(p1_name)
         @p1_name = p1_name
@@ -65,9 +69,12 @@ class PlayerOne < Player
 end 
 
 class PlayerTwo < Player
+    attr_reader :p2_name
 
-    def initalize(p2_name)
+    def initialize(p2_name)
         @p2_name = p2_name
+        @p2_symbol = "\u2B24".encode("utf-8").yellow
+
     end 
 
 end 
@@ -78,3 +85,7 @@ board.make_board()
 board.change_board(1,3,"X")
 board.show_board()
 player = Player.new()
+player.get_p1_name
+player.get_p2_name
+player.create_players
+p player.p1.p1_name
