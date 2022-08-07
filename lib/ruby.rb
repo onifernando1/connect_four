@@ -105,20 +105,24 @@ class Game
         @current_player = @p1
         @next_move = false 
         @win = false 
+        @p1_win = false 
+        @p2_win = false 
 
     end 
 
     def get_move
         @next_move = false 
         puts "#{@current_player.name}, select a collumn between 1 and 7"
-        @player_move = gets.chomp
+        # if @player_move != nil 
+            @player_move = gets.chomp
+        # end 
         @player_move = @player_move.to_i
         @player_move -= 1
         if @player_move < 0 || @player_move >= 7
             puts "INVALID MOVE!"
             get_move()
         end 
-        # puts @player_move
+        @player_move
     end 
 
     def make_move
@@ -149,7 +153,24 @@ class Game
 
     def check_win
 
-        
+        for i in (0..5)
+            for a in (0..3)
+                
+                #Horizontal wins #1
+                if @board[i][a] == @p2.symbol && @board[i][a+1] == @p2.symbol && board[i][a+2] == @p2.symbol && board[i][a+3] == @p2.symbol
+                    @p2_win = true 
+                    puts "#{@p2.name} WINS"
+                    @win = true 
+                elsif @board[i][a] == @p1.symbol && @board[i][a+1] == @p1.symbol && board[i][a+2] == @p1.symbol && board[i][a+3] == @p1.symbol
+                    @p1_win = true 
+                    puts "#{@p1.name} WINS"
+                    @win = true 
+                end 
+            end 
+        end 
+
+        for i in ()
+
     end 
 
     def round 
@@ -174,5 +195,5 @@ game.play()
 
 
 
-puts game.board[0][0] ==  game.new_board.circle
-puts game.current_player.symbol == game.new_board.circle
+# puts game.board[0][0] ==  game.new_board.circle
+# puts game.current_player.symbol == game.new_board.circle
