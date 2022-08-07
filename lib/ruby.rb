@@ -89,8 +89,8 @@ class PlayerTwo < Player
 end 
 
 class Game
-    # remove bottom, playermove board  current player after testing 
-    attr_accessor :new_board, :bottom, :player_move, :board, :current_player, :next_move
+    # remove bottom, playermove board p1 current player win after testing 
+    attr_accessor :next_move
     
     def initialize 
         @new_board = Board.new()
@@ -111,12 +111,12 @@ class Game
 
     end 
 
+    private
+
     def get_move
         @next_move = false 
         puts "#{@current_player.name}, select a collumn between 1 and 7"
-        # if @player_move != nil 
-            @player_move = gets.chomp
-        # end 
+        @player_move = gets.chomp
         @player_move = @player_move.to_i
         @player_move -= 1
         if @player_move < 0 || @player_move >= 7
@@ -226,7 +226,7 @@ class Game
 
     def check_draw
 
-       if @moves == 42 && @win = false 
+       if @moves == 42 && @win == false 
             puts "DRAW!"
             @win = true 
        end 
@@ -241,6 +241,8 @@ class Game
         check_draw()
     end 
 
+    public 
+    
     def play 
 
         until @win == true 
