@@ -104,9 +104,11 @@ class Game
         @p2 = @player.p2
         @current_player = @p1
         @next_move = false 
+        @win = false 
     end 
 
     def get_move
+        @next_move = false 
         puts "#{@current_player.name}, select a collumn"
         @player_move = gets.chomp
         @player_move = @player_move.to_i
@@ -115,39 +117,51 @@ class Game
     end 
 
     def make_move
-        
-        @bottom = 5 
 
-        until @board[@bottom][@player_move] == @new_board.circle || @bottom < 0
-            @bottom -= 1 
-        end 
+        until next_move == true 
         
-        if @bottom < 0 
-            puts "INVALID"
-        else 
-            @board[@bottom][@player_move] = @current_player.symbol
-            @next_move = true
-            if @current_player == @p1
-                @current_player = @p2
+            @bottom = 5 
+
+            until @board[@bottom][@player_move] == @new_board.circle || @bottom < 0
+                @bottom -= 1 
+            end 
+            
+            if @bottom < 0 
+                puts "INVALID"
+                break 
             else 
-                @current_player = @p1
-            end
+                @board[@bottom][@player_move] = @current_player.symbol
+                @next_move = true
+                if @current_player == @p1
+                    @current_player = @p2
+                else 
+                    @current_player = @p1
+                end
+            end 
         end 
 
     end 
 
     def round 
+        get_move()
+        make_move()
+        @new_board.show_board()
+    end 
+
+    def play 
+
+        until @win == true 
+            round()
+
+        end 
 
     end 
 
 end 
 
 game = Game.new()
-until game.next_move == true 
-    game.get_move()
-    game.make_move()
-    game.new_board.show_board()
-end 
+game.play()
+
 
 
 puts game.board[0][0] ==  game.new_board.circle
