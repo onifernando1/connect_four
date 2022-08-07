@@ -107,6 +107,7 @@ class Game
         @win = false 
         @p1_win = false 
         @p2_win = false 
+        @moves = 0
 
     end 
 
@@ -143,8 +144,10 @@ class Game
                 @next_move = true
                 if @current_player == @p1
                     @current_player = @p2
+                    @moves +=1
                 else 
                     @current_player = @p1
+                    @moves +=1
                 end
             end 
         end 
@@ -221,11 +224,21 @@ class Game
 
     end 
 
+    def check_draw
+
+       if @moves == 42 && @win = false 
+            puts "DRAW!"
+            @win = true 
+       end 
+
+    end 
+
     def round 
         get_move()
         make_move()
         @new_board.show_board()
         check_win()
+        check_draw()
     end 
 
     def play 
